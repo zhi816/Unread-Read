@@ -34,9 +34,17 @@
 ```text
 Unread-Read/
 ├── README.md                      # 專案總覽
+├── AGENTS.md                      # 專案維護規範與多 AI 協作協定
 ├── .gitignore                     # Git 忽略規則
+├── .agents/
+│   └── skills/git-sync-guardian/  # 版本同步與逐條暫存工具鏈
+├── .claude/
+│   └── skills/git-sync-guardian/  # Claude Code 技能轉介檔
 ├── docs/
-│   └── discussion-notes.md        # 完整討論紀錄（參考 Skills、開源專案、選題決策與流程設計）
+│   ├── discussion-notes.md        # 完整討論紀錄（參考 Skills、開源專案與設計決策）
+│   ├── log.md                     # 操作日誌（Append-only）
+│   ├── issues.md                  # 問題與風格修正清單（UR-NNN）
+│   └── todo.md                    # 待辦清單（TD-NNN）
 ├── prompts/
 │   └── system-instructions.md     # 可直接貼進 ChatGPT 專案 / Gemini Gem 的 Agent 專案指示
 └── books/
