@@ -47,3 +47,8 @@
   - 補充調研 `style-consistency-ai`、`Awesome-Nano-Banana-images`、`awesome-gpt-image-2-prompt` 及 `anthropics/skills`（`canvas-design`）兩段式宣言架構，並確立堅持純 AI 一次生圖（不用程式疊字）之作業原則。
   - 於 `prompts/experiments/` 建立 `01` 至 `08` 共八版實驗提示詞，依實測逐步修正「技術規格漏印（`0.75pt` 等）」、「`Flat-lay` 縮版模糊」、「弧形彎字與雙渦旋徽章化」、「置中三明治構圖」、「特定書目範例污染通用性」及「鈔票雕版寫實五官與貼白塊補丁」等問題，最終收斂出統一的純線條位移浮雕系統 `prompts/experiments/08-line-displacement-system.md`。
   - 同步於 `docs/discussion-notes.md` 新增第六章完整紀錄上述測試診斷與決策脈絡，作為作業步驟三「製作流程與修正紀錄說明」素材；並於本機 `assets/candidates/` 保留三版 `NO.01` 前期試產候選圖（未入庫）。
+
+## [2026-11-26 00:25] fix | 移除 08 階梯錯位與原型混搭以消除鋸齒條紋
+- **執行代理**：Antigravity by Google DeepMind
+- **模型版本**：Gemini 4 Hydrogen
+- **具體變更**：依實測輸出與模型規劃文本診斷（`波紋摺疊＋階梯狀錯位＋多原型混搭`導致右側生成鋸齒斑馬折紙雜訊），修訂 `prompts/experiments/08-line-displacement-system.md`：拔除摺疊／階梯錯位與線條粗硬折斷條款，改強制「平滑連續、互不相交細線＋柔和半調點陣」且每次嚴格單選一項原型；同步更新 `docs/discussion-notes.md` 補充該輪診斷紀錄。
