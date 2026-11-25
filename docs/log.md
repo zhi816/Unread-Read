@@ -29,3 +29,12 @@
 - **執行代理**：Antigravity by Google DeepMind
 - **模型版本**：Gemini 4 Hydrogen
 - **具體變更**：依使用者審閱意見，將 `prompts/system-instructions.md` 中 `2:3` 單書海報明確定義為封面海報，並由簡稱／作者姓氏修正為必須保留完整書名原稱（含正副標）與完整作者姓名；同步更新 `books/01-chaos.md` 腳本並於 `docs/issues.md` 登記 `UR-001`（`fixed`）。
+
+## [2026-11-25 19:40] asset | 完成 NO.01《渾沌》四種比例統一風格成品與書籤規範擴充
+- **執行代理**：Antigravity by Google DeepMind
+- **模型版本**：Gemini 4 Hydrogen
+- **具體變更**：
+  - 於 `prompts/system-instructions.md` 新增第 5 種「書籤 Bookmark（`9:16` 直長構圖，中軸預留 `1:3` 實體裁切安全區）」版型規範。
+  - 依 V2 瑞士網格排版重產保留完整書名與完整作者之 `2:3` 封面海報母圖 `assets/posters/01-chaos-poster.jpg`。
+  - 以該母圖為風格基準，生成同風格之 `16:9` 單書內頁橫幅 `assets/covers/01-chaos-banner.jpg`、`3:4` 概念學習圖卡 `assets/cards/01-chaos-card.jpg` 及 `9:16` 藏書書籤 `assets/bookmarks/01-chaos-bookmark.jpg`。
+  - 於 `books/01-chaos.md` 補入四張成品內嵌預覽方便 GitHub 行動端直接閱覽，並於 `docs/issues.md` 登記 `UR-002` 記錄學習圖卡「岔」字微瑕。

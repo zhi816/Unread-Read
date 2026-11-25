@@ -10,3 +10,8 @@
 - **建議解法**：將 `2:3` 明確定位為「單書封面海報（Book Cover Poster）」，規範必須完整保留書本原名（含副標）與完整作者姓名（不可只留姓氏，可中英並列）。
 - **處理**：已更新 [prompts/system-instructions.md](../prompts/system-instructions.md) 與 [books/01-chaos.md](../books/01-chaos.md)，待選定 V1/V2/V3 構圖骨架後重產並驗證全稱字體清晰度。
 - **發現於**：docs/log.md [2026-11-25 19:31]（Antigravity by Google DeepMind）
+
+### UR-002 | open | assets/cards/01-chaos-card.jpg | 3:4 概念學習圖卡右下角關鍵字 | 中文字形微瑕
+- **問題**：`assets/cards/01-chaos-card.jpg` 下方第三欄關鍵字 `03 分岔` 的「岔」字底部「山」部多出一道橫筆劃；其餘版面、配色與軌跡分岔圖解均符合規範。
+- **建議解法**：後續若作為作業最終繳交圖卡，可局部修圖修正「岔」字或以 SVG／排版文字覆寫標籤層。
+- **發現於**：docs/log.md [2026-11-25 19:40]（Antigravity by Google DeepMind）
