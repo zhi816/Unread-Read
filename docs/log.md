@@ -16,3 +16,11 @@
 - **執行代理**：Antigravity by Google DeepMind
 - **模型版本**：Gemini 4 Hydrogen
 - **具體變更**：將使用者購入的第一本書《渾沌：開創一門新科學》（*Chaos: Making a New Science*，James Gleick 著）登記至 `books/reading-list.md` 的 `NO.01`（物理 Physics，重點色 `#FF4F00`），預設狀態為 `STATUS: UNREAD`，並擬定核心視覺命題（勞倫茲奇異吸引子／從紊亂中浮現秩序）待確認後啟動母圖試作。
+
+## [2026-11-25 19:24] prompt | 調整 16:9 版型為單書內頁橫幅並建立 NO.01 腳本與母圖候選
+- **執行代理**：Antigravity by Google DeepMind
+- **模型版本**：Gemini 4 Hydrogen
+- **具體變更**：
+  - 更新 `prompts/system-instructions.md`，將第 3 種 `16:9` 版型由單純書單封面擴充為「單書內頁橫幅／專題封面（Banner / Cover）」，使其可隨每本書持續產出作為詳情頁頂部主視覺。
+  - 新增 `books/01-chaos.md`，定稿 `NO.01`《渾沌：開創一門新科學》於 `2:3` 海報、`16:9` 橫幅與 `3:4` 概念圖卡三種用途之文字腳本與視覺隱喻。
+  - 試產 3 版 `NO.01` 單書海報母圖候選（建築極簡版、刊物編輯版、科學策展圖譜版），待使用者選定 1 版作為正式風格母圖。
