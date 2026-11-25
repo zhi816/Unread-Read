@@ -14,3 +14,9 @@
 - **完成條件**：產出至少 3 張風格一致的不同類型圖片，完成步驟三製作流程說明（截止日 12/07 23:59）。
 - **關聯**：TD-001
 - **來源**：2026-11-25 登記，Antigravity by Google DeepMind。
+
+### TD-003 | open | docs | 建置 index.html 藏書首頁與單書多比例圖庫
+- **內容**：在核心圖片素材（書單封面 16:9、單書海報 2:3、概念學習圖卡 3:4 等）產出並鎖定風格後，建立靜態 `index.html` 與書目資料檔；首頁展示所有已購書籍封面與學科／狀態篩選，點進單書可依原比例檢視該書不同類型之圖片內容。
+- **完成條件**：首頁可於本機雙擊與 GitHub Pages 正常開啟並瀏覽全部書目封面，點入單書可呈現多比例圖卡與 `UNREAD / READ` 狀態，視覺沿用 [prompts/system-instructions.md](../prompts/system-instructions.md)。
+- **關聯**：TD-002
+- **來源**：2026-11-25 登記，Antigravity by Google DeepMind。
