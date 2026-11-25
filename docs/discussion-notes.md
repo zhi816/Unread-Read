@@ -91,3 +91,51 @@
 - [ ] 生成第一張「母圖（Key Visual）」，挑選最滿意版本下載並設為後續參考圖以鎖定風格一致性
 - [ ] 依序產出至少 3 種不同類型圖片：海報（2:3）、學習圖卡（3:4）、書單封面（16:9）
 - [ ] 整理作業步驟三「製作流程說明」（記錄規則設計、參考圖固定、以及修正風格漂移的過程）
+
+---
+
+## 六、提示詞演進與風格收斂紀錄（2026-11-25 至 2026-11-26）
+
+> 本節完整紀錄 `prompts/experiments/01` 至 `08` 的反覆實測、翻車診斷與設計決策，可直接作為第十二週作業步驟三「Agent 設定方法、修正風格漂移與排版迭代說明」之核心素材。
+
+### 1. 補充開源參考調研與「純 AI 生圖」底線確立
+- **補充參考開源專案**：
+  - `GenielabsOpenSource/style-consistency-ai`：強調以 Reference Atlas 基準母圖、Minimal Delta 最小變動與 Corrective Guidelines（糾偏條款）維持跨圖一致性。
+  - `PicoTrex/Awesome-Nano-Banana-images`、`JimmyLv/awesome-nano-banana`：Gemini / Nano Banana 生態之編輯感插畫與海報結構配方。
+  - `flaqai/awesome-gpt-image-2-prompt`：Prompt as Code 結構化排版階層、明確文字階層與精準字串約束。
+  - `anthropics/skills`（`canvas-design`）：兩段式設計哲學流程（Phase 1 先寫構成宣言 Design Manifesto，Phase 2 再落筆於畫布，強調只鎖美學基因、不綁死制式模板）。
+  - `zeke/swiss-design-skill`、`rampstackco/swiss-style-theme`、`swiss-ui/core`：供後續靜態網頁展示頁（`TD-003`）參考的零建置瑞士網格 CSS 規範。
+- **工程與作業底線決策**：明確排除以程式繪圖或 SVG 後製疊字（例如 `p5.riso`）來規避生圖模型的錯字問題，堅持**純靠 AI Agent 專案指示一次生成完整圖片**，確保完全貼合第十二週作業「統一風格圖像產生的 Agent」評分核心。
+
+### 2. 八版實驗提示詞（`prompts/experiments/`）實測診斷與修正脈絡
+
+#### 階段 A：基礎規範測試與「提示詞漏印」診斷（`01`–`03`）
+- **測試檔案**：[01-style-atlas-risograph.md](../prompts/experiments/01-style-atlas-risograph.md)、[02-editorial-ink-doodle.md](../prompts/experiments/02-editorial-ink-doodle.md)、[03-embossed-swiss-typography.md](../prompts/experiments/03-embossed-swiss-typography.md)。
+- **實測發現的三個關鍵問題**：
+  1. **技術規格漏印（Prompt Leakage）**：指令中若出現 `0.75pt–1.25pt`、`2:3 POSTER`、`DOUBLE-COLOR RISOGRAPH`、`CONTEMPORARY DESIGN ARCHIVE` 等設計元詞彙，生圖模型會誤將其直接當成文案印進座標線與頁尾。
+  2. **文字過載與微距視角縮版**：`03` 同時要求 `Flat-lay Graphic Print` 與 7 組以上文字，導致畫面外圈多出灰色桌面邊框、壓縮海報本體面積，底部極小繁體中文筆劃模糊崩壞。
+  3. **精簡四組文案的高穩定度**：`02` 僅保留「書名、作者、1 句極短提問、`NO.XX STATUS`」四組文字且保持大留白，實現中英文零錯字；但編排屬於手繪敘事風，若未指定編號會出現模型自編編號（如 `NO. 24`）的情況。
+- **解法**：建立 **Text Whitelist（文字白名單）**，刪除所有 `pt` 數值與比例元詞彙，規定僅能出現使用者提供的四組精確文案，且核心提問限制於 8–10 字內。
+
+#### 階段 B：文字圖形海報實驗與減法修正（`04`–`05`）
+- **動機**：初期模板規定過死，導致不同書籍容易長成相同的「上標題＋中圖解＋下頁尾」公式，缺乏平面海報的創意發散度。參考當代文字圖形海報靈感與 `canvas-design` 兩段式宣言後，建立 [04-kinetic-typo-graphic.md](../prompts/experiments/04-kinetic-typo-graphic.md)。
+- **色彩基調升級**：依審美評估將 65% 背景由溫暖象牙米白（`#EFECE6`）調整為高張力**純淨畫廊白（`#FFFFFF` / `#FAFAFA`）**搭配極致純黑（`#0A0A0A`）與 10% 單一學科色，拉開黑白銳利度。
+- **踩坑與反效果紀錄**：
+  1. **無融合感的巨字堆疊**：首輪放開構圖後，模型僅將厚重粗黑體放得極大並斜切色帶，搭配散落刻度與雜點，文字與幾何呈現兩層分離。
+  2. **過度疊加規則引發的「徽章太極化」**：當在 `04` 同時強制「補滿 25% 黑塊＋弧形軌道排字＋雙渦旋」，模型直接退化成復古社團徽章與太極陰陽魚，且彎曲排字造成英文拼字錯誤（`NEW SEW SCIENCE`）與作者譯名擅改。
+- **減法重構（`05`）**：建立 [05-brutalist-minimal-fusion.md](../prompts/experiments/05-brutalist-minimal-fusion.md)，大幅精簡指令長度，明訂**禁止弧形彎字、禁止徽章構圖、文字一律直線排列**。實測物理／數學題材時純白留白與黑墨張力明顯改善；但套用至心理／哲學書目時暴露「萬用幾何黑圓切片與書籍內容不搭嘎」及「90 度側轉長串英文破字」兩個盲點。
+- **測試流程經驗**：發現於同一個對話串連續測圖會產生「跨輪記憶殘留」（沿用前一張的弧形排字或錯字譯名），後續測試新版指令須開全新對話窗口以確保獨立驗證。
+
+#### 階段 C：多路線拆解、通用性原則校正與風格統一收斂（`06`–`08`）
+- **多路線試驗與通用性修正（`06`）**：建立 [06-multi-route-editorial-poster.md](../prompts/experiments/06-multi-route-editorial-poster.md)，將構圖拆為五大路線（Routes A–E）並禁止「置中三明治構圖（上置中標＋中正方圖＋下置中字）」。同時修正一項關鍵 Prompt 原則：**嚴禁在通用系統指令中寫死特定書名與特定物件範例**，以免模型遇到該書時照抄硬拼或污染其他書籍，全面清除 `prompts/` 內特定書目殘留。
+- **跨學科風格斷層診斷**：以 `06` 實測心理學（路線 A：人頭與大腦剪影）與數學（路線 C：拓撲線網與半調點陣向量射線）後，確認路線 C 在現代美感、純白留白比例與中英字體銳利度上表現最佳；若與具象實心剪影混用，系列並列時會產生明顯風格斷層。
+- **「寫實雕版肖像」誤觸發與去細節校正（`07`）**：建立 [07-optical-halftone-system.md](../prompts/experiments/07-optical-halftone-system.md) 統一全系列採用路線 C 語法。當嘗試允許「具象人物改以等高線網格繪製」時，模型被觸發寫實鈔票雕版人像先驗，刻出完整五官、鬍鬚與皮膚紋理，並於右上角硬切白色長方形貼紙蓋字。隨即修訂 `07`，明訂「去寫實五官／去細節幾何抽離」與「禁止硬貼白方塊遮蓋圖形」。
+- **最終美學定案：純線條位移浮雕系統（`08`）**：對比純線條藝術參考（透過等距平行線與同心波紋的平滑隆起、壓縮與粗細調變來模擬無五官形體與空間深淵），確立排斥「無規律手繪亂線（Chaotic scribbles）」與「實心小人剪影」的共識，彙整為 [08-line-displacement-system.md](../prompts/experiments/08-line-displacement-system.md)：
+  1. **唯一造物語法**：全面採用高秩序等距平行線／同心波紋位移浮雕，禁止外輪廓描邊、寫實五官、任何實心黑剪影與無規律亂線。
+  2. **受控張力破缺**：情緒與衝突僅能透過階梯錯位（Stepped shear）、高頻波形震盪或整齊斷裂呈現。
+  3. **10% 學科色雙向融入（2C）**：依書籍氣質選用「關鍵波紋線轉色」或「銳利向量射線穿刺」。
+  4. **主動留白收束**：線條場佔 55%–65% 後齊整止步或平順漸隱，自然讓出連貫 `#FFFFFF` 純白空間承載直排明體與瑞士無襯線體。
+
+### 3. 待驗證與下一步（銜接 `TD-002`、`TD-003`）
+- [ ] 開立全新對話測試 [08-line-displacement-system.md](../prompts/experiments/08-line-displacement-system.md)，分別實測心理／哲學與物理／數學書目，驗證跨學科並列時「風格高度統一 ＋ 構圖自由變化」的實際產出。
+- [ ] 確認 `08` 穩定後，將其正式升格更新至 [`prompts/system-instructions.md`](../prompts/system-instructions.md)，並依序產出四種比例成品（`2:3` 海報、`3:4` 學習圖卡、`16:9` 橫幅、`9:16` 書籤）供作業繳交與 `index.html` 展示頁使用。
